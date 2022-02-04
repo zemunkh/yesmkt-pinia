@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
-      <img class="mx-auto h-24 w-auto" src="https://lh3.googleusercontent.com/oR_ZooUNxuGsIEiV5eTUtea_NOYi4-iQQjy6b2kv9rRS7xR1sETYdhH3W3v3EUzsSq8WyH6ulI2P2u6yqqKiKBRO5rAdLhv5kqdgA3Emlik3TuKfxW3lnL-RI-2jfvmH2TDkH504gA=w2400" alt="Workflow">
+      <img class="mx-auto h-24 w-auto" :src="require('../assets/images/yes_logo.png')" alt="Workflow">
       <h2 class="mt-6 text-center text-6xl font-extrabold text-gray-900">
         {{ counterStore.counter }}
       </h2>

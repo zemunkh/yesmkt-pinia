@@ -1,22 +1,25 @@
 import { useAuthStore } from "../store/user";
+import { useDeviceStore } from "../store/device";
 
-export default function ({app, route, redirect}){
-  const store = useAuthStore();
+
+export default async function ({app, route, redirect}){
+  const store = useAuthStore()
+  store.initializeAuthListener()
   console.log('LOGGED IN: ', store.isLoggedIn);
 
-  if (route.path !== '/LoginPage') {
-    if (!store.isLoggedIn) {
-      return redirect('/LoginPage')
-    }
-  } else {
-    if (route.path === '/LoginPage') {
-      if(store.isLoggedIn) {
-        return redirect('/')
-      } else {
-        return redirect('/LoginPage')
-      }
-    }
-  }
+  // if (route.path !== '/LoginPage') {
+  //   if (!store.isLoggedIn) {
+  //     return redirect('/LoginPage')
+  //   }
+  // } else {
+  //   if (route.path === '/LoginPage') {
+  //     if(store.isLoggedIn) {
+  //       return redirect('/')
+  //     } else {
+  //       return redirect('/LoginPage')
+  //     }
+  //   }
+  // }
   // if (route.path !== '/LoginPage') {
   //   // we are on a protected route
   //   if(!fb.auth.currentUser) {

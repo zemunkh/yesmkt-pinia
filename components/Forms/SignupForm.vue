@@ -50,7 +50,7 @@
 
 import { ref, reactive, defineComponent, useRouter } from "@nuxtjs/composition-api";
 import { useAuthStore } from "~/store/user";
-import ErrorMsg from "./ErrorMsg.vue";
+import ErrorMsg from "../Tools/ErrorMsg.vue";
 
 export default defineComponent({
     setup() {
