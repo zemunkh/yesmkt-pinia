@@ -1,16 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
-  collection,
   doc,
   getDoc,
   setDoc,
-  addDoc,
-  deleteDoc,
-  Timestamp,
-  updateDoc
+  Timestamp
 } from 'firebase/firestore/lite';
 
+// MRS pls create a Firestore Service separated from Auth Service
 import {
   getAuth,
   signOut,
@@ -33,13 +30,15 @@ const config = {
   storageBucket: 'yesmkt-demo.appspot.com', // process.env.STORAGE_BUCKET,
   messagingSenderId: '2056023461', // process.env.MESSAGING_SENDER_ID,
   appId: '1:2056023461:web:ce09dd379322fa4ec58c4c', // process.env.APP_ID,
-  measurementId: 'G-HQDW29BSYF' // process.env.MEASUREMENT_ID
+  measurementId: 'G-HQDW29BSYF', // process.env.MEASUREMENT_ID
 };
 
 const app = initializeApp(config);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+
+export const firebaseApp = app
 
 export const fbCreateAccount = async (
   email,
@@ -80,10 +79,12 @@ export const fbSignOut = async () => {
 export const fbAuthStateListener = (callback) => {
   console.log('Auth state  called');
   onAuthStateChanged(auth, (user) => {
+    console.log(user)
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      callback(user);
+      return user
+      // callback(user);
     } else {
       // User is signed out
       callback(null);
@@ -130,44 +131,3 @@ export const fbGetUserProfile = async () => {
     return null;
   }
 };
-
-
-// Add new post
-async function addPost(userId, message, imageUrl, author) {
-  const postCollection = collection(db, 'posts');
-  return postRef = await addDoc(postCollection, {
-    userId: userId,
-    message: message,
-    imageUrl: imageUrl,
-    author: author,
-    createdOn: Timestamp.fromDate(new Date())
-  });
-}
-
-
-// Get a list of posts from your database
-async function getPosts(db) {
-  const postCollection = collection(db, 'posts');
-  const postSnapshot = await getDocs(postCollection);
-  const postList = postSnapshot.docs.map(doc => doc.data());
-  return postList;
-}
-
-async function deletePost(postId) {
- return await deleteDoc(doc(db, 'posts', postId));
-}
-
-async function updatePostText(postId, { message } ) {
-  return await updateDoc(doc(db, 'posts', postId), {
-    message: message,
-    createdOn: Timestamp.fromDate(new Date())
-  });
-}
-
-export {
-  db,
-  getPosts,
-  addPost,
-  deletePost,
-  updatePostText,
-}

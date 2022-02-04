@@ -1,8 +1,8 @@
 <template>
 
   <div class="mt-8 space-y-6">
-    <Loader :isLoading="isActive"/>
-    <ErrorMsg header="Error" :errMessage="store.error" />
+    <loader :isLoading="isActive"/>
+    <error-msg header="Error" :errMessage="store.error" />
     <div class="rounded-md shadow-sm -space-y-px">
       <div>
         <label for="first-name" class="sr-only">Fist name</label>
@@ -51,8 +51,10 @@
 import { ref, reactive, defineComponent, useRouter } from "@nuxtjs/composition-api";
 import { useAuthStore } from "~/store/user";
 import ErrorMsg from "../Tools/ErrorMsg.vue";
+import Loader from "../Tools/Loader.vue";
 
 export default defineComponent({
+    components: { ErrorMsg, Loader },
     setup() {
         const isActive = ref(false)
 
@@ -80,7 +82,6 @@ export default defineComponent({
           isActive
         };
     },
-    components: { ErrorMsg }
 })
 
 </script>

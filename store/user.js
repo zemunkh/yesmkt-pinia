@@ -6,7 +6,7 @@ import {
   fbGetUserProfile,
   fbSignIn,
   fbSignOut,
-} from "../utils/firebaseHelper";
+} from "../utils/authService";
 
 export const useAuthStore = defineStore('authStore', {
   // convert to a function
@@ -29,19 +29,6 @@ export const useAuthStore = defineStore('authStore', {
             const profile = (await fbGetUserProfile());
             this.profile = profile;
             console.log('Profile: ', profile);
-          }
-          resolve(true);
-        });
-      });
-    },
-    initializeAuthListener() {
-      return new Promise((resolve) => {
-        fbAuthStateListener(async (user) => {
-          this.user = user ? user : null;
-
-          if (user) {
-            const profile = (await fbGetUserProfile());
-            this.profile = profile;
           }
           resolve(true);
         });
