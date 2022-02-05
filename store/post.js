@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 import {
   addItem,
   getItem,
-  getItemListByQuery
+  getItemListByQuery,
+  Timestamp
 } from "../utils/firestoreService";
 
 export const usePostStore = defineStore('postStore', {
@@ -16,6 +17,7 @@ export const usePostStore = defineStore('postStore', {
   getters: {
     isAvailable: (state) => state.posts !== null,
     userError: (state) => state.error,
+    getTimeStamp: () => Timestamp
   },
   actions: {
     async loadPosts(userId) {

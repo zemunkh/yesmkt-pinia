@@ -5,14 +5,14 @@
     <br>
     <NewPost />
 
-    <ul class="flex flex-wrap">
+    <!-- <ul class="flex flex-wrap">
       <li
         v-for="post of posts"
-        :key="post.slug"
+        :key="post.id"
         class="xs:w-full md:w-1/2 px-2 xs:mb-6 md:mb-12 article-card"
       >
         <NuxtLink
-          :to="{ name: 'blog-slug', params: { slug: post.slug } }"
+          :to="{ name: 'post-id', params: { id: post.id } }"
           class="flex transition-shadow duration-150 ease-in-out shadow-sm hover:shadow-md xxlmax:flex-col"
         >
           <img
@@ -29,7 +29,7 @@
           </div>
         </NuxtLink>
       </li>
-    </ul>
+    </ul> -->
 
     <Counter />
   </div>
@@ -42,8 +42,8 @@ import NewPost from "~/components/Forms/NewPost.vue";
 import { ref, reactive, defineComponent, useRouter } from "@nuxtjs/composition-api";
 import { useAuthStore } from "~/store/user";
 import { usePostStore } from "~/store/post";
-import ErrorMsg from "../Tools/ErrorMsg.vue";
-import Loader from "../Tools/Loader.vue";
+import ErrorMsg from "../components/Tools/ErrorMsg.vue";
+import Loader from "../components/Tools/Loader.vue";
 
 
 export default {
@@ -56,7 +56,7 @@ export default {
 
     const posts = reactive([])
 
-    posts = await storePost.loadPosts(storeUser.user.uid)
+    // posts = await storePost.loadPosts(storeUser.user.uid)
 
     return {
       posts

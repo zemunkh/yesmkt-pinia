@@ -60,7 +60,14 @@ async function getItem(collectionName, id) {
 
 async function getItemListByQuery(collectionName, param, value) {
   const q = query(collection(db, collectionName), where(param, '==', value));
-  return await getDocs(q);
+  const querySnapshot = await getDocs(q);
+  const result = []
+  querySnapshot.forEach((doc) => {
+    var snap = doc.data()
+    snap.id = doc.id;
+    result.push(snap)
+  })
+  return result
 }
 
 // much more generic is update(collection, id, data)
@@ -78,6 +85,7 @@ async function updatePostText(postId, { message } ) {
 
 export {
   db,
+  Timestamp,
   addItem,
   getItem,
   setItem,

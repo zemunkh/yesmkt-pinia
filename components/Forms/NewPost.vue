@@ -1,6 +1,144 @@
 <template>
-  <div class="lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
-    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+  <!-- Container -->
+  <div class="w-1/2 h-80 mx-auto my-8 bg-gray-100">
+    <div
+      class="max-w-2xl mx-auto h-80 flex flex-col items-center justify-center px-4"
+    >
+      <!-- Logo Image -->
+      <!-- Header -->
+      <h1 class="text-gray-900 font-black text-5xl uppercase text-center">
+        New Post
+      </h1>
+      <h2 class="text-indigo-700 text-sm font-semibold italic">
+       Say hi!
+      </h2>
+
+      <!-- Post message-->
+      <div class=" w-full mt-6 flex rounded-md shadow-sm">
+        <text-input
+          v-model="title"
+          placeholder="Title"
+          iconName="notation"
+        />
+      </div>
+
+      <!-- Post message-->
+      <div class=" w-full mt-6 flex rounded-md shadow-sm">
+        <text-input
+          v-model="message"
+          placeholder="Hello"
+          iconName="document"
+        />
+      </div>
+
+      <!-- Url Input -->
+      <div class=" w-full mt-6 flex rounded-md shadow-sm">
+        <text-input
+          v-model="imageUrl"
+          placeholder="www.gettyimages.com"
+          iconName="image"
+        />
+        <loading-button
+          :isLoading="loading"
+          buttonText="Post"
+          loadingText="Posting"
+          iconName="circle-up"
+          @clickEvent="savePost"
+        />
+      </div>
+
+      <!-- Error Message -->
+      <error-msg header="Error" :errMessage="errorMessage" />
+    </div>
   </div>
 </template>
+
+<script>
+
+import { ref, computed, defineComponent } from '@nuxtjs/composition-api'
+import { useAuthStore } from "~/store/user";
+import { usePostStore } from "~/store/post";
+import LoadingButton from './LoadingButton'
+import TextInput from './TextInput'
+import ErrorMsg from "../Tools/ErrorMsg";
+export default defineComponent({
+  components: {
+    LoadingButton,
+    ErrorMsg,
+    TextInput
+  },
+  setup () {
+    const userStore = useAuthStore()
+
+    const postStore = usePostStore()
+
+    const loading = ref(false)
+
+    const title = ref('')
+
+    const message = ref('')
+
+    const imageUrl = ref('')
+
+    const errorMessage = ref('')
+
+    const isUrlOk = computed(() => {
+      var regex = new RegExp(
+        '^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+          '(\\#[-a-z\\d_]*)?$',
+        'i'
+      )
+      if (imageUrl.value.match(regex) === null) {
+        errorMessage.value = 'URL is invalid.'
+        return false
+      }
+      return true
+    })
+
+    const savePost = () => {
+      loading.value = true
+      // Save data on FB database
+      console.log('Clicked to add new post: ', imageUrl.value);
+
+      if(isUrlOk) {
+
+        postStore.addPost({
+          title: title.value,
+          message: message.value,
+          imageUrl: imageUrl.value,
+          createdOn: postStore.getTimeStamp.now()
+        }).then((res) => {
+          if(res.length > 0) {
+            loading.value = false
+          } else {
+            loading.value = false
+          }
+        }).catch((err) => {
+          errorMessage = err.message
+        })
+
+      } else {
+        alert('Not valid URL!')
+      }
+    }
+
+    const isNullOrWhitespace = (str) => {
+      return str === null || str.match(/^ *$/) !== null
+    }
+    return {
+      title,
+      loading,
+      message,
+      imageUrl,
+      errorMessage,
+      savePost,
+      isNullOrWhitespace,
+      isUrlOk
+    }
+  }
+})
+</script>

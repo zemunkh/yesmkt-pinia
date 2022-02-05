@@ -10,7 +10,7 @@ import { defineComponent } from "@nuxtjs/composition-api";
 export default defineComponent({
   props: {
     header: String,
-    errMessage: Error
+    errMessage: String || Error
   },
   setup() {
 
