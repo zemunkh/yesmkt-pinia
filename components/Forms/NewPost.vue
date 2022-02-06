@@ -1,8 +1,8 @@
 <template>
   <!-- Container -->
-  <div class="w-1/2 h-80 mx-auto my-8 bg-gray-100">
+  <div class="w-1/2 h-80 mx-auto rounded-lg shadow-2xl my-8 bg-gray-100">
     <div
-      class="max-w-2xl mx-auto h-80 flex flex-col items-center justify-center px-4"
+      class="max-w-2xl h-80 flex flex-col items-center justify-center px-4"
     >
       <!-- Logo Image -->
       <!-- Header -->
@@ -13,8 +13,8 @@
        Say hi!
       </h2>
 
-      <!-- Post message-->
-      <div class=" w-full mt-6 flex rounded-md shadow-sm">
+      <!-- Post title-->
+      <div class=" w-full mt-6 flex rounded-md">
         <text-input
           v-model="title"
           placeholder="Title"
@@ -50,6 +50,7 @@
       <!-- Error Message -->
       <error-msg header="Error" :errMessage="errorMessage" />
     </div>
+
   </div>
 </template>
 
@@ -107,12 +108,17 @@ export default defineComponent({
       if(isUrlOk) {
 
         postStore.addPost({
+          userId: userStore.user.uid,
           title: title.value,
           message: message.value,
           imageUrl: imageUrl.value,
-          createdOn: postStore.getTimeStamp.now()
+          createdOn: new Date()
         }).then((res) => {
           if(res.length > 0) {
+            postStore.loadPosts(userStore.user.uid)
+            title.value = ''
+            message.value = ''
+            imageUrl.value = ''
             loading.value = false
           } else {
             loading.value = false

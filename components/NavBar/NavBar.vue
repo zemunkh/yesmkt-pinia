@@ -26,7 +26,7 @@
           <li><a href="#" class="active border-b-2 border-blue-500 pb-1">Home</a></li>
           <li><a href="#" class="">Services</a></li>
           <li><a href="#" class="">Features</a></li>
-          <li><a @click="logout" class="cta bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white font-semibold">Log out</a></li>
+          <li><button @click="logout" class="cta bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white font-semibold">Log out</button></li>
         </ul>
       </div>
 
@@ -45,7 +45,7 @@
       </transition>
 
       <!-- Drawer Menu -->
-      <aside class="p-5 transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30" :class="isOpen ? 'translate-x-0' : '-translate-x-full'">
+      <aside class="p-5 transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-50" :class="isOpen ? 'translate-x-0' : '-translate-x-full'">
 
         <div class="close">
           <button class="absolute top-0 right-0 mt-4 mr-4" @click=" isOpen = false">
@@ -138,9 +138,13 @@ export default defineComponent({
 
     const drawer = () => isOpen.value = !isOpen.value;
 
-    const logout = async () => {
-      store.logoutUser()
-      router.replace("/");
+    const logout = () => {
+      store.logoutUser().then((res) => {
+        if(res) {
+          router.push('/LoginPage');
+        }
+      })
+
     }
 
     watch(isOpen, (newVal, oldVal) => {

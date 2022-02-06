@@ -30,7 +30,6 @@ export default {
     '@pinia/nuxt',
   ],
   router: {
-    middleware:['server-init'],
     middleware:['auth']
   },
   // Modules: https://go.nuxtjs.dev/config-modules

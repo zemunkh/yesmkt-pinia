@@ -63,6 +63,7 @@ export default defineComponent({
 
     const loginWithEmail = async () => {
       isActive.value = true
+      store.error = null
       await logInUser(loginForm.email, loginForm.password)
       router.push('/')
       isActive.value = false

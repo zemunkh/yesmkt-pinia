@@ -48,7 +48,7 @@
 
 <script>
 
-import { ref, reactive, defineComponent, useRouter } from "@nuxtjs/composition-api";
+import { ref, reactive, onMounted, defineComponent, useRouter } from "@nuxtjs/composition-api";
 import { useAuthStore } from "~/store/user";
 import ErrorMsg from "../Tools/ErrorMsg.vue";
 import Loader from "../Tools/Loader.vue";
@@ -71,10 +71,16 @@ export default defineComponent({
         });
         const signUpWithEmail = async () => {
           isActive.value = true
+          store.error = null
           await store.createAccount(signUpForm.email, signUpForm.password, signUpForm.firstname, signUpForm.lastname, signUpForm.phone);
           router.push('/');
           isActive.value = false
         };
+
+        onMounted(() => {
+          store.error = null
+        })
+
         return {
           signUpForm,
           signUpWithEmail,

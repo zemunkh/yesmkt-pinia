@@ -67,7 +67,7 @@ export const fbCreateAccount = async (
 
 export const fbSignIn = async (email, password) => {
   const response = await signInWithEmailAndPassword(auth, email, password);
-  console.log(response);
+  console.log('Successful: ', response.user.email);
   return response;
 };
 
@@ -79,7 +79,6 @@ export const fbSignOut = async () => {
 export const fbAuthStateListener = (callback) => {
   console.log('Auth state  called');
   onAuthStateChanged(auth, (user) => {
-    console.log(user)
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User

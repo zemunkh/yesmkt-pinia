@@ -5,9 +5,9 @@
     <br>
     <NewPost />
 
-    <!-- <ul class="flex flex-wrap">
+    <ul class="flex flex-wrap">
       <li
-        v-for="post of posts"
+        v-for="post of storePost.posts"
         :key="post.id"
         class="xs:w-full md:w-1/2 px-2 xs:mb-6 md:mb-12 article-card"
       >
@@ -25,11 +25,13 @@
             class="p-6 flex flex-col justify-between xxlmin:w-1/2 xxlmax:w-full"
           >
             <h2 class="font-bold">{{ post.title }}</h2>
-            <p>by {{ post.author.name }}</p>
+            <p class="font-bold text-gray-600 text-sm">
+              {{ post.message }}
+            </p>
           </div>
         </NuxtLink>
       </li>
-    </ul> -->
+    </ul>
 
     <Counter />
   </div>
@@ -39,7 +41,7 @@
 import Counter from "~/components/Counter.vue";
 import NavBar from "~/components/NavBar/NavBar.vue"
 import NewPost from "~/components/Forms/NewPost.vue";
-import { ref, reactive, defineComponent, useRouter } from "@nuxtjs/composition-api";
+import { ref, onMounted } from "@nuxtjs/composition-api";
 import { useAuthStore } from "~/store/user";
 import { usePostStore } from "~/store/post";
 import ErrorMsg from "../components/Tools/ErrorMsg.vue";
@@ -54,12 +56,14 @@ export default {
     const storeUser = useAuthStore();
     const storePost = usePostStore();
 
-    const posts = reactive([])
-
-    // posts = await storePost.loadPosts(storeUser.user.uid)
+    onMounted(async () => {
+      console.log('Userid: ', storeUser.user.uid);
+      storePost.loadPosts(storeUser.user.uid)
+    })
 
     return {
-      posts
+      storeUser,
+      storePost,
     }
   }
 }

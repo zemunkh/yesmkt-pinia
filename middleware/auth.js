@@ -1,9 +1,8 @@
 import { useAuthStore } from "../store/user";
-// import { useDeviceStore } from "../store/device";
 
-
-export default async function ({app, route, redirect}){
+export default async function ({app, route, redirect }){
   const store = useAuthStore()
+  // await store.initializeAuthListener()
   console.log('LOGGED IN: ', store.isLoggedIn);
 
   if (route.path !== '/LoginPage') {
@@ -14,8 +13,6 @@ export default async function ({app, route, redirect}){
     if (route.path === '/LoginPage') {
       if(store.isLoggedIn) {
         return redirect('/')
-      } else {
-        return redirect('/LoginPage')
       }
     }
   }

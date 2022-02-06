@@ -17,12 +17,11 @@ export const usePostStore = defineStore('postStore', {
   getters: {
     isAvailable: (state) => state.posts !== null,
     userError: (state) => state.error,
-    getTimeStamp: () => Timestamp
   },
   actions: {
     async loadPosts(userId) {
       try {
-        await getItemListByQuery('posts', 'userId', userId)
+        const data = await getItemListByQuery('posts', 'userId', userId)
         this.posts = data ? data: null
         this.error = null;
         return this.posts

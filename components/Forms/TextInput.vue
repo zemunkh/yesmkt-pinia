@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-grow focus-within:z-10">
+  <div class="group inline-flex flex-grow focus-within:z-5">
     <div
       class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
     >
