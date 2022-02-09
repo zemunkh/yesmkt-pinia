@@ -5,6 +5,12 @@
         "Firestore",
         "firstname",
         "lastname",
-        "nuxtjs"
+        "nuxt",
+        "nuxtjs",
+        "persistedstate",
+        "pinia",
+        "predeploy",
+        "ssrapp",
+        "tailwindcss"
     ]
 }

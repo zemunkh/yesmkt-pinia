@@ -1,0 +1,53 @@
+{
+  "Counter": {
+    "description": "Auto imported from components/Counter.vue"
+  },
+  "Home": {
+    "description": "Auto imported from components/Home.vue"
+  },
+  "FormsLoadingButton": {
+    "description": "Auto imported from components/Forms/LoadingButton.vue"
+  },
+  "FormsLoginForm": {
+    "description": "Auto imported from components/Forms/LoginForm.vue"
+  },
+  "FormsNewPost": {
+    "description": "Auto imported from components/Forms/NewPost.vue"
+  },
+  "FormsSignupForm": {
+    "description": "Auto imported from components/Forms/SignupForm.vue"
+  },
+  "FormsTextInput": {
+    "description": "Auto imported from components/Forms/TextInput.vue"
+  },
+  "NavBarFailedDivider": {
+    "description": "Auto imported from components/NavBar-Failed/Divider.vue"
+  },
+  "NavBarFailedIcon": {
+    "description": "Auto imported from components/NavBar-Failed/Icon.vue"
+  },
+  "NavBar": {
+    "description": "Auto imported from components/NavBar-Failed/NavBar.vue"
+  },
+  "NavBarItem": {
+    "description": "Auto imported from components/NavBar-Failed/NavBarItem.vue"
+  },
+  "NavBarItemLabel": {
+    "description": "Auto imported from components/NavBar-Failed/NavBarItemLabel.vue"
+  },
+  "NavBarMenu": {
+    "description": "Auto imported from components/NavBar-Failed/NavBarMenu.vue"
+  },
+  "NavBarFailedUserAvatar": {
+    "description": "Auto imported from components/NavBar-Failed/UserAvatar.vue"
+  },
+  "ToolsErrorMsg": {
+    "description": "Auto imported from components/Tools/ErrorMsg.vue"
+  },
+  "ToolsLoader": {
+    "description": "Auto imported from components/Tools/Loader.vue"
+  },
+  "NavBarTailwind": {
+    "description": "Auto imported from components/NavBar/Tailwind.vue"
+  }
+}

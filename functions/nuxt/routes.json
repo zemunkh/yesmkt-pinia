@@ -1,0 +1,30 @@
+[
+  {
+    "name": "LoginPage",
+    "path": "/LoginPage",
+    "component": "/Users/zemunkh/Desktop/yesmkt-pinia/src/pages/LoginPage.vue",
+    "chunkName": "pages/LoginPage",
+    "_name": "_d48da478"
+  },
+  {
+    "name": "NotFound",
+    "path": "/NotFound",
+    "component": "/Users/zemunkh/Desktop/yesmkt-pinia/src/pages/NotFound.vue",
+    "chunkName": "pages/NotFound",
+    "_name": "_38a38b73"
+  },
+  {
+    "name": "post-id",
+    "path": "/post/:id?",
+    "component": "/Users/zemunkh/Desktop/yesmkt-pinia/src/pages/post/_id.vue",
+    "chunkName": "pages/post/_id",
+    "_name": "_61a178af"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/zemunkh/Desktop/yesmkt-pinia/src/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_08ee0a1e"
+  }
+]
